@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->text('token')->default(null);
+            $table->text('token')->nullable();
             $table->boolean('confirm');
-            $table->string('confirmation_code')->default(null);
-            $table->dateTime('confirmation_code_expired_in')->default(null);
+            $table->string('confirmation_code')->nullable();
+            $table->dateTime('confirmation_code_expired_in')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -26,19 +26,20 @@ function removeRow(id,url) {
 // Upload file
 $('#upload').change(() => {
     const form = new FormData();
-    form.append('file', $(this).files[0]);
+    form.append('thumb_1', $(this)[0].files[0]);
     $.ajax({
         processData: false,
         contentType: false,
         type: 'POST',
         dataType: 'JSON',
         data: form,
-        url: '/admin/upload/services',
-        success: result => {
-            if (result.error === false) {
-                $('#image_show').html('<a href= "' + results.url + '" target=_blank>' +
-                    '<img src = "' + results.url + '" width ="100px" ></a > ')
-                $('file').val(results.url);
+        url: '/admin/products/store',
+        success: results => {
+            if (results.error === false) {
+                console.log("Product");
+                $('#image_show_face').html('<a href= "' + results.url + '" target="_blank">' +
+                    '<img src = "' + results.url + '"width ="100px"></a>')
+                $('#thumb_1').val(results.url);
             } else {
                 alert('upload file FAILED')
             }

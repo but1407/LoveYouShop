@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use App\Services\CategoriesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\Category\CreateFormRequest;
 class CategoryController extends Controller
@@ -26,10 +26,15 @@ class CategoryController extends Controller
         $this->categoriesService = $categoriesService;
         $this->category = $category;
     }
-    public function index(){
-        $categories = $this->category->orderBy('updated_at','desc')->paginate(20);
+    public function index(Request $request){
+        // $categories = $this->category->orderBy('updated_at','asc')->paginate(20);
+        $keyword = '';
+        if (!empty($request->name)) {
+            $keyword = $request->name;
+        }
         
-        return view('category.index',compact('categories'));
+        $categories = $this->category->getCategory($keyword);
+        return view('admin.category.index',compact('categories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,7 +44,7 @@ class CategoryController extends Controller
     public function create()
     {
         $htmlOptions = $this->categoriesService->getCategory($parentId ='');
-        return view('category.add',compact('htmlOptions'));
+        return view('admin.category.add',compact('htmlOptions'));
     }
 
     /**
@@ -51,8 +56,14 @@ class CategoryController extends Controller
     public function store(CreateFormRequest $request)
     {
         $result = $this->categoriesService->create($request);
-
-        return redirect()->back();
+        // if ($result) {
+        //     Session::flash('success','create dashboard successfully');//tạo message khi tạo dashboard thành công bằng session flash
+            
+        // }
+        return redirect()->back()->with('success','create dashboard successfully');
+        // return response()->json([
+        //     'message' => '1'
+        // ],201);
     }
 
     /**
@@ -77,7 +88,7 @@ class CategoryController extends Controller
         $category =$this->category->find($id);
         $htmlOptions = $this->categoriesService->getCategory($category->parent_id);
 
-        return view('category.edit',compact('category','htmlOptions'));
+        return view('admin.category.edit',compact('category','htmlOptions'));
     }
 
     /**
@@ -89,7 +100,7 @@ class CategoryController extends Controller
      */
     public function update($id,Category $category,CreateFormRequest $request)
     {
-       $result = $this->categoriesService->update($id,$category,$request);
+        $result = $this->categoriesService->update($id,$category,$request);
         
         return redirect()->route('categories.index');
 
