@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Services\LoginService;
+use App\Events\Auth\UserLoggedOut;
 // use Illuminate\Validation\Validator;
 class LoginController extends Controller
 {
@@ -60,7 +61,7 @@ class LoginController extends Controller
                 'password' => $request->input('password')
             ], $request->input('remember'))
         ) {
-            return redirect()->route('categories.index');
+            return redirect()->route('home');
 
             // return redirect()->back(); //chuyen huong tro lai
             
@@ -120,5 +121,20 @@ class LoginController extends Controller
         Session::flash('error', 'Password không khớp');
         return redirect()->back();
     }
-    
+    public function logout(Request $request)
+    {
+        // Remove the socialite session variable if exists
+        if (app('session')->has(config('access.socialite_session_name'))) {
+            app('session')->forget(config('access.socialite_session_name'));
+        }
+
+        // Fire event, Log out user, Redirect
+        event(new UserLoggedOut($request->user()));
+
+        // Laravel specific logic
+        Auth::guard()->logout();
+        $request->session()->invalidate();
+
+        return redirect()->route('login.index');
+    }
 }

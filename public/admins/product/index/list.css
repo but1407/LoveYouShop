@@ -1,0 +1,9 @@
+.product_image_150_100
+{
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+ul{
+    list-style: none;
+}

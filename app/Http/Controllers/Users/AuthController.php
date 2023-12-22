@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Session;
 use App\Services\LoginService;
 
 
-
 class AuthController extends Controller
 {
     private $loginservice;
@@ -29,6 +28,7 @@ class AuthController extends Controller
     }
    public function register(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'name' => 'string|between:2,100',
             'email' => 'required|string|email|max:100',
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password),
                 'confirm' => false,
                 'confirmation_code' => rand(100000, 999999),
-                'confirmation_code_expired_in' => Carbon::now()->addSecond(60)
+                'confirmation_code_expired_in' => Carbon::now()->addSecond(60),
             ]
         ));
         try {

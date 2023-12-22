@@ -5,6 +5,9 @@
     @section('title')
         <title>{{ $title }}</title>
     @endsection
+    @section('title')
+        <title>{{ $title }}</title>
+    @endsection
     @include('partials.head')
 </head>
 
@@ -51,6 +54,45 @@
     {{-- footer --}}
     @include('partials.foot')
 
+    @section('js')
+        <script>
+            < script >
+                var countdownElement = document.getElementById('countdown');
+            var secondsRemaining = 60;
+
+            function updateCountdown() {
+                if (secondsRemaining > 0) {
+                    secondsRemaining--;
+                    countdownElement.innerHTML = secondsRemaining + 's';
+                } else {
+                    countdownElement.innerHTML = 'Expired';
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+        </script>
+        <script>
+            var countdownElement = document.getElementById('countdown');
+            var countdown = document.getElementById('count');
+
+            var secondsRemaining = 60;
+
+            function updateCountdown() {
+                if (secondsRemaining > 0) {
+                    secondsRemaining--;
+                    countdownElement.innerHTML = secondsRemaining + 's';
+                    countdown.value = secondsRemaining;
+
+                } else {
+                    countdownElement.innerHTML = 'Expired';
+                    countdown.innerHTML = 'Expired';
+
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+        </script>
+    @endsection
 </body>
 
 </html>

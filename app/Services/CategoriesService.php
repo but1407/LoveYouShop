@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Components\Recusive;
 use App\Models\Category;
 use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 
 
@@ -28,18 +27,15 @@ class CategoriesService
     }
     public function create($request)
     {
-        
         try{
             Category::create([ //tạo danh mục
-                'name'=>(string)$request->input('name'),
-                'parent_id'=>(int)$request->input('parent_id'),
-                'slug'=> str_slug((string)$request->input('name')),
-
+                'name'=>$request->input('name'),
+                'parent_id'=>$request->input('parent_id'),
+                'slug'=> str_slug($request->input('name')),
             ]);
             Session::flash('success','create dashboard successfully');//tạo message khi tạo dashboard thành công bằng session flash
         }catch(\Exception $err){
             Session::flash('error', $err->getMessage());
-
             return false;
         }
         return true;

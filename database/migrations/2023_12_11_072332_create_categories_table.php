@@ -17,8 +17,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('parent_id');
-            $table->integer('slug');
-
+            $table->text('description')->nullable();
+            $table->text('image_link')->nullable();
+            $table->text('slug');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

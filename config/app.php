@@ -176,6 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -191,7 +193,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
+    
 
 ];
