@@ -9,6 +9,7 @@ use App\Http\Controllers\Users\AuthController;
 use App\Http\Controllers\Users\VerificationController;
 use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\Sliders\SliderController;
+use App\Http\Controllers\Admin\Users\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +101,7 @@ Route::middleware(['auth'])
 
             });
             #Setting
-             Route::controller(SettingController::class)->name('settings.')->prefix('settings')->group(function () {
+            Route::controller(SettingController::class)->name('settings.')->prefix('settings')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
@@ -109,8 +110,16 @@ Route::middleware(['auth'])
                 Route::get('/delete/{id}', 'delete')->name('delete');
 
             });
+            Route::controller(UserController::class)->name('users.')->prefix('users')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::post('/update/{id}', 'update')->name('update');
+                Route::get('/delete/{id}', 'delete')->name('delete');
 
-
+            });
+            
             #logout
             Route::get('/logout', [LoginController::class, 'logout'])->name('users.logout');
         });
