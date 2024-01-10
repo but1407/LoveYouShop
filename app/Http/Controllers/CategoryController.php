@@ -27,6 +27,7 @@ class CategoryController extends Controller
         $this->category = $category;
     }
     public function index(Request $request){
+
         // $categories = $this->category->orderBy('updated_at','asc')->paginate(20);
         $keyword = '';
         if (!empty($request->name)) {

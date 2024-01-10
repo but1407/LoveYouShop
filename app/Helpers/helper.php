@@ -168,6 +168,37 @@ class Helper
         }
         return $html;
     }
+     public static function user($users, $status =1){
+        $html = '';
+        foreach($users as $key=>$user){
+            if ($status == 1) {
+                $html .= '
+                <tr>
+                    <td>' . $key + $users->firstItem() . '</td>
+                    <td>' . $user->name . '</td>
+                    <td>' . $user->email . '</td>   
+                    <td>' . $user->updated_at->toDateString() . '</td>
+                    <td>
+                        <a class ="btn btn-primary"
+                        href="/admin/users/edit/' . $user->id . '">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm action_delete"
+                            href=""
+                        data-url="/admin/users/delete/' . $user->id . '" met>
+                            DELETE
+                        </a>
+
+                    </td>
+                </tr>
+                ';
+                unset($users[$key]);
+                $html .= self::user($users);
+            }
+            $status=0;
+        }
+        return $html;
+    }
     public static function active($active=null):string{
         return $active == 0 ? '<span class="btn btn-danger btn-xs">Chưa kích hoạt</span>' : '<span class="btn btn-success btn-xs">Kích hoạt</span>';
     }

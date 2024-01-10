@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Users\UserController;
 // Route::get('/', function () {
 //     return redirect()->view('home');
 // });
+
 Route::get('/', function () {
     return redirect()->route('login.index');
 })->name('login');
@@ -35,7 +36,7 @@ Route::prefix('admin/users')->group(function() {
         Route::controller(LoginController::class)->group(function () {
                 Route::get('login','index')->name('login.index');
                 Route::post('login/store', 'store')->name('login.store');
-                #forgot password
+                #forgot password    
                 Route::get('users/forgot-password', 'forgotPassword')->name('users.forgot-password');
                 Route::post('users/forgot-password','postForgotPass')->name('forgot-password');
                 Route::get('users/forgot-password/search-success','searchSuccess')->name('search-success');
@@ -47,7 +48,7 @@ Route::prefix('admin/users')->group(function() {
             Route::post('/register',  'register')->name('register');
             Route::post('/re_register',  're_register');
             
-         });
+        });
         Route::controller(VerificationController::class)->group(function () {
             Route::get('email/verify/{id}', 'verify')->name('verification.verify');
             Route::post('email/verify_OTP', 'verify_OTP')->name('verification.verify_OTP');
@@ -91,7 +92,7 @@ Route::middleware(['auth'])
 
             });
             #Slider
-             Route::controller(SliderController::class)->name('sliders.')->prefix('sliders')->group(function () {
+            Route::controller(SliderController::class)->name('sliders.')->prefix('sliders')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
@@ -110,13 +111,14 @@ Route::middleware(['auth'])
                 Route::get('/delete/{id}', 'delete')->name('delete');
 
             });
+            #User
             Route::controller(UserController::class)->name('users.')->prefix('users')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{id}', 'edit')->name('edit');
-                Route::post('/update/{id}', 'update')->name('update');
-                Route::get('/delete/{id}', 'delete')->name('delete');
+                // Route::post('/update/{id}', 'update')->name('update');
+                // Route::get('/delete/{id}', 'delete')->name('delete');
 
             });
             

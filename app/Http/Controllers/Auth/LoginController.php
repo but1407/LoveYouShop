@@ -38,22 +38,22 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest')->except('logout');
     }
 
-    protected function sendLoginResponse(Request $request){
-        $request->session()->regenerate();
-        $this->clearLoginAttempts($request);
-        if($response =$this->authenticated($request,$this->guard()->user())){
-            return $response;
-        }
-        $sessionId = $request->session()->getId();
-        $user = $request->user();
-        $user->last_session = $sessionId;
-        $user->save();
+    // protected function sendLoginResponse(Request $request){
+    //     $request->session()->regenerate();
+    //     $this->clearLoginAttempts($request);
+    //     if($response =$this->authenticated($request,$this->guard()->user())){
+    //         return $response;
+    //     }
+    //     $sessionId = $request->session()->getId();
+    //     $user = $request->user();
+    //     $user->last_session = $sessionId;
+    //     $user->save();
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
-    }
+    //     return $request->wantsJson()
+    //         ? new JsonResponse([], 204)
+    //         : redirect()->intended($this->redirectPath());
+    // }
 }

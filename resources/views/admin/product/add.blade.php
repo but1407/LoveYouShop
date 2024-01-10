@@ -7,6 +7,7 @@
 @section('css')
     <link href="{{ asset('vendors/select2/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admins/product/add/add.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admins/product/add/add.js') }}" rel="stylesheet" />
 @endsection
 
 
@@ -14,11 +15,11 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content-header', ['name' => 'menus', 'key' => 'Add'])
+        @include('partials.content-header', ['name' => 'Products', 'key' => 'Add'])
         @include('admin.alert')
 
         <!-- Main content -->
-        <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">

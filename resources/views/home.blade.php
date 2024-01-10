@@ -7,7 +7,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @include('partials.content-header', ['name' => 'Home', 'key' => ''])
-
+        @include('admin.alert')
 
         <!-- Main content -->
         <div class="content">

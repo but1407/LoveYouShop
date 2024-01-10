@@ -34,7 +34,6 @@
                                                 class="form-control" placeholder="Nhập tên sản phẩm">
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>chọn danh Mục</label>
@@ -109,6 +108,7 @@
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->
                 </div>
+            </div>
         </form>
         <!-- /.content -->
     </div>

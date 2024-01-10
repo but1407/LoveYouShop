@@ -49,9 +49,7 @@ class ProductService{
         if(!empty($data)){
             $dataProductCreate['feature_image_name'] = $data['file_name'];
             $dataProductCreate['feature_image_path'] = $data['file_path'];
-
         }
-        
         return $dataProductCreate;
     }
     public function storeImageMultiple($request, $product){

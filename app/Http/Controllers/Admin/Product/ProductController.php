@@ -32,7 +32,7 @@ class ProductController extends Controller
     }
     public function index(Request $request){
         $filters = [];
-         if (!empty($request->name)) {
+        if (!empty($request->name)) {
             $last_name = $request->name;
             $filters[] = ['products.name', '=', $last_name];
         }
@@ -52,10 +52,10 @@ class ProductController extends Controller
 
             // image upload
             if ($request->hasFile('image_path')) {
-               $storeImage= $this->productservice->storeImageMultiple($request,$product);
+                $storeImage= $this->productservice->storeImageMultiple($request,$product);
             }
             //tags
-             if(!empty($request->tags)){
+            if(!empty($request->tags)){
                 $tagIds=$this->productservice->storeTags($request);
                 $product->tags()->attach($tagIds);
             }
